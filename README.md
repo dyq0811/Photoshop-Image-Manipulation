@@ -4,7 +4,7 @@ An image manipulation program, in the vein of Photoshop.
 ## Authors
 [Yingqi Ding](https://github.com/dyq0811) & Vivian Looi
 
-##
+## Available Operations
 The operations our program is able to recognize and perform (the bolded words are the operation names to be entered at the command line by the user):
 1. exposure - change exposure of an image
 2. α-blend - blend two images by a given ratio
@@ -23,6 +23,27 @@ to take as input a PPM file named trees.ppm and create an output file named tree
 ./project trees.ppm trees-building-blended.ppm blend building.ppm 0.5
 
 to generate the output file named trees-buidling-blended.ppm which is a blend of both images.
+
+## Error Reporting
+Return value & Error condition it signifies
+
+0	No errors detected
+
+1	Failed to supply input filename or output filename, or both
+
+2	Specified input file could not be opened
+
+3	Specified input file is not a properly-formatted PPM file, or reading input somehow fails
+
+4	No operation name was specified, or operation name specified was invalid
+
+5	Incorrect number of arguments or kind of arguments specified for the specified operation
+
+6	Arguments for the specified operation were out of range for the given input image, or otherwise senseless
+
+7	Specified output file could not be opened for writing, or writing output somehow fails
+
+8	Any other error condition not specified above
 
 ## Implementation Process
 For the read_ppm function, it first assert if the file pointer given as the parameter is not null, then ignores the tag and comments, then assert that the number of rows and columns in the image aren't 0, and that the colors is 255. The function then creates an Image structure and allocate a pointer pointing to the dynamic memory of the size of Image. cols and rows in the structure are assigned to the number of columns and rows of the image specified at the top of the file respectively. data is allocated with a pointer pointing to the dynamic memory of the size of a pixel times the dimensions of the image. At last, binary data encoding pixels are read into data. The file pointer is closed, and the Image created is returned to the main function. 
